@@ -17,12 +17,6 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        hp = 5f;
-        attackSpeed = 0.5f;
-        attackCooldown = 0;
-        dmg = 1000f;
-        range = 2.2f;
-        velocity = 12;
         cam = Camera.main;
     }
 

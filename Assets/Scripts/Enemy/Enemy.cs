@@ -8,27 +8,12 @@ public class Enemy : MonoBehaviour
     public float dmg;
     public float range;
     public float value;
+    public float coinValue;
     public float speed;
     public GameObject player;
     public GMScript gm;
 
-    void Start()
-    {
-        hp = 5f;
-        attackSpeed = 0.5f;
-        actattackCooldown = 0;
-        dmg = 1f;
-        range = 2f;
-        value = 1f;
-        speed = 1f;
-    }
-
-    void Update()
-    {
-        MoveEnemy();
-    }
-
-    void MoveEnemy()
+    public void MoveEnemy()
     {
         Vector2 dir = (player.transform.position - transform.position).normalized;
         transform.Translate(dir * speed * Time.deltaTime);

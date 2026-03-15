@@ -175,11 +175,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac38b30bc7848322af2090ec7a0661f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  hp: -24
+  hp: 5
   attackSpeed: 0.5
-  attackCooldown: -6.297321
+  attackCooldown: 0
   dmg: 1
-  range: 1
+  range: 2
   velocity: 20
   gm: {fileID: 0}
   rangeCircle: {fileID: 7213103203533825779}
