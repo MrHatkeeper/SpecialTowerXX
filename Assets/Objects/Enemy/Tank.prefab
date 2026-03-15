@@ -93,12 +93,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862f63fcffaa9c788bc86709b45462fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  hp: 10
-  attackSpeed: 0.5
-  actattackCooldown: 0
+  hp: 8
+  isAttacking: 0
+  attackSpeed: 1.5
+  attackCooldown: 0
   dmg: 1
   range: 2
-  value: 1
+  value: 5
+  coinValue: 0
   speed: 0.8
   player: {fileID: 0}
   gm: {fileID: 0}

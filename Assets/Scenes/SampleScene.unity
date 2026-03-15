@@ -370,11 +370,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GMScript
   player: {fileID: 5885964682760214656, guid: 38ae257ec9ed373f5ba2ce3deb1c174a, type: 3}
-  ps: {fileID: 0}
   spawnedEnemies: []
   enemyCatalog:
   - {fileID: 9006299358787370599, guid: d3571142229e9f42cb6cae2e8c652060, type: 3}
+  - {fileID: 89768484785205775, guid: e3ef0bac9739f225e893ea6d169f5796, type: 3}
+  - {fileID: 2775002886968089787, guid: 178aab549d1752dcca3f17589ca6d583, type: 3}
   wave: 1
+  waveCooldown: 0
   spawnTimer: 0
   actSpawnTimer: 0
   money: 0

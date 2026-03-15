@@ -30,29 +30,41 @@ public class GMScript : MonoBehaviour
         player = Instantiate(player, new Vector2(0f, 0f), Quaternion.identity);
         ps = player.GetComponent<Player>();
         ps.gm = this;
+        SetEnemies();
         SetUpWave();
     }
 
     void Update()
     {
-        if (enemiesToSpawn.Count == 0 && spawnedEnemies.Count == 0 && waveCooldown <= 0)
+        if (ps.hp <= 0)
         {
-            enemiesToSpawn = SetUpWave();
+            print("GameOver");
         }
-        foreach (GameObject enemy in spawnedEnemies)
+        else
         {
-            enemy.GetComponent<Enemy>().MoveEnemy();
+            if (enemiesToSpawn.Count == 0 && spawnedEnemies.Count == 0 && waveCooldown <= 0)
+            {
+                enemiesToSpawn = SetUpWave();
+            }
+
+            foreach (GameObject enemy in spawnedEnemies)
+            {
+                Enemy es = enemy.GetComponent<Enemy>();
+                es.MoveEnemy();
+                es.AttackPlayer();
+            }
+
+            if (actSpawnTimer <= 0 && enemiesToSpawn.Count != 0)
+            {
+                actSpawnTimer = spawnTimer;
+                SpawnEnemy();
+            }
+            ClearEnemies();
+            ps.UpdatePlayer();
+            actSpawnTimer -= Time.deltaTime;
+            actWaveCooldown -= Time.deltaTime;
         }
 
-        if (actSpawnTimer <= 0 && enemiesToSpawn.Count != 0)
-        {
-            actSpawnTimer = spawnTimer;
-            SpawnEnemy();
-        }
-        ClearEnemies();
-        ps.UpdatePlayer();
-        actSpawnTimer -= Time.deltaTime;
-        actWaveCooldown -= Time.deltaTime;
     }
 
     void SpawnEnemy()
@@ -62,9 +74,15 @@ public class GMScript : MonoBehaviour
         GameObject randEnemy = Instantiate(enemyToSpawn, spawnPos, Quaternion.identity); ;
         spawnedEnemies.Add(randEnemy);
         enemiesToSpawn.Remove(enemyToSpawn);
-        enemiesToSpawn.RemoveAt(0);
-        randEnemy.GetComponent<Enemy>().player = player;
-        randEnemy.GetComponent<Enemy>().gm = this;
+    }
+
+    void SetEnemies()
+    {
+        foreach (GameObject enemy in enemyCatalog)
+        {
+            enemy.GetComponent<Enemy>().player = player;
+            enemy.GetComponent<Enemy>().gm = this;
+        }
     }
 
     public void ClearEnemy(GameObject enemy)
@@ -103,17 +121,17 @@ public class GMScript : MonoBehaviour
 
         while (finalWaveValue > 0)
         {
-            print(finalWaveValue);
             List<GameObject> allowedEnemies = new();
             foreach (var enemy in enemyCatalog)
             {
                 if (enemy.GetComponent<Enemy>().value <= finalWaveValue)
                 {
                     allowedEnemies.Add(enemy);
-             
+
                 }
             }
-            if (allowedEnemies.Count == 0){
+            if (allowedEnemies.Count == 0)
+            {
                 break;
             }
             GameObject addedEnemy = allowedEnemies[Random.Range(0, allowedEnemies.Count - 1)];

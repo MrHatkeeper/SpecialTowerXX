@@ -185,11 +185,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   hp: 5
+  isAttacking: 0
   attackSpeed: 0.5
-  actattackCooldown: 0
+  attackCooldown: 0
   dmg: 1
   range: 2
   value: 1
+  coinValue: 0
   speed: 1
   player: {fileID: 0}
   gm: {fileID: 0}

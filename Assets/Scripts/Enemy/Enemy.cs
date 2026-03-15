@@ -3,8 +3,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float hp;
+    public bool isAttacking = false;
     public float attackSpeed;
-    public float actattackCooldown;
+    public float attackCooldown;
     public float dmg;
     public float range;
     public float value;
@@ -19,6 +20,19 @@ public class Enemy : MonoBehaviour
         transform.Translate(dir * speed * Time.deltaTime);
     }
 
+    public void AttackPlayer()
+    {
+        if (isAttacking)
+        {
+            if (attackCooldown <= 0)
+            {
+                player.GetComponent<Player>().hp -= dmg;
+                attackCooldown = attackSpeed;
+            }
+            attackCooldown -= Time.deltaTime;
+        }
+    }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -30,8 +44,8 @@ public class Enemy : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
+            isAttacking = true;
             speed = 0;
-            player.GetComponent<Player>().hp -= dmg;
         }
     }
 
