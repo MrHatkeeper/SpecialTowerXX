@@ -200,7 +200,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -350,6 +350,8 @@ GameObject:
   m_Component:
   - component: {fileID: 990946234}
   - component: {fileID: 990946233}
+  - component: {fileID: 990946236}
+  - component: {fileID: 990946235}
   m_Layer: 0
   m_Name: GM
   m_TagString: Untagged
@@ -370,6 +372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GMScript
   player: {fileID: 5885964682760214656, guid: 38ae257ec9ed373f5ba2ce3deb1c174a, type: 3}
+  sUps: {fileID: 990946236}
+  hUps: {fileID: 990946235}
   spawnedEnemies: []
   enemyCatalog:
   - {fileID: 9006299358787370599, guid: d3571142229e9f42cb6cae2e8c652060, type: 3}
@@ -396,6 +400,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &990946235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990946232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b246d76d75449eb02a17a38c3f6f9721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HardUpgrades
+  maxHpHUpgrade: 5
+  hpRegenHUpgrade: 0
+  attackSpeedHUpgrade: 0.6
+  dmgHUpgrade: 1
+  rangeHUpgrade: 2.2
+--- !u!114 &990946236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990946232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4981f23e6a29e62b97a357847d928a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoftUpgrades
+  maxHpSUpgrade: 1
+  hpRegenSUpgrade: 1
+  attackSpeedSUpgrade: 1
+  dmgSUpgrade: 1
+  rangeSUpgrade: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

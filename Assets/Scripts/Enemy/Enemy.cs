@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
         {
             if (attackCooldown <= 0)
             {
-                player.GetComponent<Player>().hp -= dmg;
+                player.GetComponent<Player>().DamagePlayer(dmg);
                 attackCooldown = attackSpeed;
             }
             attackCooldown -= Time.deltaTime;

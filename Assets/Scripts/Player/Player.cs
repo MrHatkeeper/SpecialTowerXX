@@ -3,26 +3,32 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float hp;
-    public float attackSpeed;
-    public float attackCooldown;
-    public float dmg;
-    public float range;
+    public float maxHp;
+    public float actHp;
+    float hpRegen;
+    float attackSpeed;
+    float attackCooldown;
+    float dmg;
+    float range;
     public float velocity;
+
+    public SoftUpgrades sUps;
+    public HardUpgrades hUps;
+
     public GMScript gm;
     public GameObject rangeCircle;
     public GameObject projectile;
     public List<GameObject> enemiesInRange;
     public Camera cam;
 
-    void Start()
+    /*void Start()
     {
         cam = Camera.main;
-    }
+    }*/
 
     public void UpdatePlayer()
     {
-        SetRange();
+        UpdateStats();
         if (attackCooldown <= 0 && enemiesInRange.Count != 0)
         {
             Shoot();
@@ -30,6 +36,15 @@ public class Player : MonoBehaviour
         }
         attackCooldown -= Time.deltaTime;
 
+    }
+
+    void UpdateStats()
+    {
+        maxHp = hUps.maxHpHUpgrade * sUps.maxHpSUpgrade;
+        hpRegen = hUps.hpRegenHUpgrade * sUps.hpRegenSUpgrade;
+        attackSpeed = hUps.attackSpeedHUpgrade * sUps.attackSpeedSUpgrade;
+        dmg = hUps.dmgHUpgrade * sUps.dmgSUpgrade;
+        range = hUps.rangeHUpgrade * sUps.rangeSUpgrade;
     }
 
     void Shoot()
@@ -42,6 +57,7 @@ public class Player : MonoBehaviour
 
         Vector2 center = cam.transform.position;
 
+        //Bounds limit
         float x = center.x + width + 10;
         float y = center.y + height + 10;
         newProjectile.GetComponent<Projectile>().SetProjectile(dmg, velocity, (closetEnemy.transform.position - transform.position).normalized, x, y);
@@ -75,5 +91,25 @@ public class Player : MonoBehaviour
     void SetRange()
     {
         rangeCircle.transform.localScale = new Vector2(range, range);
+    }
+
+    public void SetPlayer()
+    {
+        cam = Camera.main;
+
+        maxHp = hUps.maxHpHUpgrade;
+        hpRegen = hUps.hpRegenHUpgrade;
+        actHp = maxHp;
+
+        attackSpeed = hUps.attackSpeedHUpgrade;
+        dmg = hUps.dmgHUpgrade;
+        range = hUps.rangeHUpgrade;
+
+        SetRange();
+    }
+
+    public void DamagePlayer(float dmg)
+    {
+        actHp -= dmg;
     }
 }

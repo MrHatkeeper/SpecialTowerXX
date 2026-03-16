@@ -6,6 +6,8 @@ public class GMScript : MonoBehaviour
     private Camera cam;
     public GameObject player;
     private Player ps;
+    public SoftUpgrades sUps;
+    public HardUpgrades hUps;
     public List<GameObject> spawnedEnemies;
     public List<GameObject> enemyCatalog;
     private List<GameObject> enemiesToSpawn = new();
@@ -29,14 +31,19 @@ public class GMScript : MonoBehaviour
 
         player = Instantiate(player, new Vector2(0f, 0f), Quaternion.identity);
         ps = player.GetComponent<Player>();
+
+        ps.hUps = hUps;
+        ps.sUps = sUps;
         ps.gm = this;
+
+        ps.SetPlayer();
         SetEnemies();
-        SetUpWave();
+        SetWave();
     }
 
     void Update()
     {
-        if (ps.hp <= 0)
+        if (ps.actHp <= 0)
         {
             print("GameOver");
         }
@@ -44,7 +51,7 @@ public class GMScript : MonoBehaviour
         {
             if (enemiesToSpawn.Count == 0 && spawnedEnemies.Count == 0 && waveCooldown <= 0)
             {
-                enemiesToSpawn = SetUpWave();
+                enemiesToSpawn = SetWave();
             }
 
             foreach (GameObject enemy in spawnedEnemies)
@@ -112,7 +119,7 @@ public class GMScript : MonoBehaviour
         }
     }
 
-    List<GameObject> SetUpWave()
+    List<GameObject> SetWave()
     {
         List<GameObject> output = new();
         float baseWaveValue = 5;
